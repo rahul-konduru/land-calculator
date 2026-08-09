@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="description" content="Offline Land Dimension, Area Summation and Unit Calculator for Android">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
+  <title>Land Dimension Calculator</title>
+
+  <!-- PWA Web App Manifest -->
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232563eb'/><text x='50' y='65' font-size='50' text-anchor='middle' fill='white'>📐</text></svg>">
+  
+  <!-- CSS Design System -->
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+
+  <div id="app">
+    <!-- App Header -->
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-icon">📐</div>
+        <div class="brand-title">Land Calc</div>
+      </div>
+      <button id="installPwaBtn" class="install-btn" aria-label="Install App">
+        <span>📲</span> Install App
+      </button>
+    </header>
+
+    <!-- Offline Notification Banner -->
+    <div id="offlineBanner" class="offline-banner">
+      ⚡ Working Offline
+    </div>
+
+    <!-- Main View Content Container -->
+    <main class="main-content">
+      
+      <!-- VIEW 1: Calculator Panel -->
+      <section id="viewCalculator" class="view-panel active">
+        <div class="card">
+          <div class="card-title">
+            <span>Plot Measurement & Summation</span>
+            <span style="font-size: 0.8rem; color: var(--accent); font-weight: 500;">Step 1 Ready</span>
+          </div>
+
+          <div class="step-placeholder">
+            <div class="step-placeholder-icon">📐✨</div>
+            <div class="step-placeholder-title">PWA Foundation Ready!</div>
+            <div class="step-placeholder-desc">
+              The project structure, offline service worker, and UI dock are set up.<br><br>
+              <strong>Next Step (Step 2)</strong>: Share your calculation formulas and examples so we can implement the exact core math logic!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 2: Calculation History Panel -->
+      <section id="viewHistory" class="view-panel">
+        <div class="card">
+          <div class="card-title">Saved Calculations</div>
+          <div id="historyList" class="step-placeholder">
+            <div class="step-placeholder-icon">📜</div>
+            <div class="step-placeholder-desc">No saved calculations yet. History will appear here when you sum up plot dimensions.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 3: Settings & Unit Presets Panel -->
+      <section id="viewSettings" class="view-panel">
+        <div class="card">
+          <div class="card-title">App Info & Units</div>
+          <div style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
+            <p><strong>App Version:</strong> 1.0.0 (PWA Offline Enabled)</p>
+            <p><strong>Storage Status:</strong> Local Persistent Storage Active</p>
+            <p style="margin-top: 0.75rem;">This PWA can be added to your Android home screen and will function 100% offline without internet connection.</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Dock Navigation Bar -->
+    <nav class="tab-dock" aria-label="Main Navigation">
+      <button class="tab-btn active" data-tab="viewCalculator">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM8 8h2v2H8zm6 0h2v2h-2zm-6 4h2v2H8zm6 0h2v2h-2zm-6 4h8v2H8z"/></svg>
+        <span>Calculator</span>
+      </button>
+
+      <button class="tab-btn" data-tab="viewHistory">
+        <svg viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 9 0 0118 0z"/></svg>
+        <span>History</span>
+      </button>
+
+      <button class="tab-btn" data-tab="viewSettings">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        <span>Settings</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Main JavaScript App Entry -->
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
