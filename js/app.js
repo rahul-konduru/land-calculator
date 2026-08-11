@@ -104,9 +104,8 @@ function initCalculatorUI() {
       if (!btn) return;
 
       const key = btn.getAttribute('data-key');
-      triggerHaptic();
-
       if (key) {
+        triggerHaptic();
         handleKeyInput(key);
       }
     });

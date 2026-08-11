@@ -428,6 +428,27 @@ html, body {
   font-weight: 700;
 }
 
+.key-decorative {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-muted);
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+  font-size: 1.35rem;
+  cursor: default;
+  user-select: none;
+  opacity: 0.75;
+  transition: opacity 0.2s ease, background 0.2s ease;
+}
+
+.key-decorative:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.key-decorative:active {
+  transform: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
 .key-zero {
   grid-column: span 2;
 }
