@@ -148,63 +148,7 @@ html, body {
 .main-content {
   flex: 1;
   padding: 1.25rem;
-  padding-bottom: 5rem;
-}
-
-/* Tabs Navigation Bar (Bottom Dock) */
-.tab-dock {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 600px;
-  height: 64px;
-  background: var(--bg-glass);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-top: 1px solid var(--border-glass);
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  z-index: 90;
-  padding: 0 0.5rem;
-}
-
-.tab-btn {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.2rem;
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  font-size: 0.725rem;
-  font-weight: 600;
-  cursor: pointer;
-  padding: 0.4rem 0;
-  transition: color var(--transition-fast);
-}
-
-.tab-btn svg {
-  width: 22px;
-  height: 22px;
-  stroke: currentColor;
-  fill: none;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  transition: transform var(--transition-fast);
-}
-
-.tab-btn.active {
-  color: var(--primary);
-}
-
-.tab-btn.active svg {
-  transform: translateY(-2px);
+  padding-bottom: 2rem;
 }
 
 /* Card Container */
@@ -326,17 +270,340 @@ html, body {
   color: var(--text-muted);
 }
 
-/* View switcher display */
-.view-panel {
-  display: none;
+/* Digital Calculator Display Screen */
+.calc-screen-card {
+  background: linear-gradient(145deg, hsl(222, 45%, 11%), hsl(222, 50%, 7%));
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.35rem;
+  position: relative;
+  overflow: hidden;
 }
 
-.view-panel.active {
+.calc-screen-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.15), transparent 70%);
+  pointer-events: none;
+}
+
+.calc-expression-bar {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  min-height: 1.2rem;
+  font-family: monospace, monospace;
+  word-break: break-all;
+}
+
+.calc-main-display {
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  text-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+  word-break: break-all;
+}
+
+.calc-subtitle-badge {
+  margin-top: 0.2rem;
+}
+
+.human-badge {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+  background: rgba(16, 185, 129, 0.15);
+  color: hsl(160, 84%, 45%);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  letter-spacing: 0.01em;
+}
+
+.calc-conversions-bar {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.2rem;
+}
+
+.dot-separator {
+  opacity: 0.4;
+}
+
+/* Phone Calculator Keypad Grid */
+.calc-keypad-card {
+  padding: 0.85rem;
+  margin-bottom: 1.25rem;
+}
+
+.keypad-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 56px;
+  gap: 0.6rem;
+}
+
+.key-btn {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-glass);
+  font-size: 1.35rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+  transition: transform 0.08s ease, background 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.key-btn:active {
+  transform: scale(0.92);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.key-num {
+  background: hsl(222, 35%, 15%);
+  color: #ffffff;
+}
+
+.key-num:active {
+  background: hsl(222, 35%, 22%);
+}
+
+.key-action {
+  background: hsl(222, 25%, 22%);
+  color: var(--danger);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.key-op {
+  background: hsl(217, 40%, 22%);
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.key-special {
+  background: var(--accent-gradient);
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: none;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.key-equals {
+  background: var(--primary-gradient);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 1.6rem;
+  border: none;
+  box-shadow: var(--shadow-glow);
+}
+
+.key-save {
+  background: hsl(250, 45%, 22%);
+  color: #c084fc;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.key-zero {
+  grid-column: span 2;
+}
+
+/* Land Parcels Breakdown List */
+.parcels-card {
+  margin-bottom: 2rem;
+}
+
+.title-left {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.badge {
+  font-size: 0.725rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-full);
+  background: rgba(59, 130, 246, 0.15);
+  color: var(--primary);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.btn-text-danger {
+  background: none;
+  border: none;
+  color: var(--danger);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+}
+
+.btn-text-danger:hover {
+  text-decoration: underline;
+}
+
+.parcel-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+  max-height: 280px;
+  overflow-y: auto;
+  padding-right: 0.2rem;
+}
+
+.parcel-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 0.9rem;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  transition: background var(--transition-fast);
+}
+
+.parcel-item:hover {
+  background: rgba(30, 41, 59, 0.7);
+}
+
+.parcel-item-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.parcel-idx {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+}
+
+.parcel-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.parcel-code {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.parcel-human {
+  font-size: 0.775rem;
+  color: var(--text-muted);
+}
+
+.parcel-del-btn {
+  background: none;
+  border: none;
+  color: var(--text-subtle);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.3rem;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast);
+}
+
+.parcel-del-btn:hover {
+  color: var(--danger);
+}
+
+.empty-parcel-state {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.empty-parcel-state span {
+  font-size: 2rem;
   display: block;
-  animation: fadeIn 0.2s ease-out;
+  margin-bottom: 0.4rem;
+  opacity: 0.7;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Total Summary Box */
+.total-summary-box {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(59, 130, 246, 0.12));
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  text-align: center;
 }
+
+.summary-header {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 0.2rem;
+}
+
+.summary-code {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.summary-human {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: hsl(160, 84%, 45%);
+  margin-bottom: 0.75rem;
+}
+
+.summary-conversions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.8rem;
+}
+
+.summary-conversions strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--text-main);
+}
+
+.summary-conversions small {
+  color: var(--text-muted);
+}
+

@@ -41,65 +41,95 @@
       
       <!-- VIEW 1: Calculator Panel -->
       <section id="viewCalculator" class="view-panel active">
-        <div class="card">
-          <div class="card-title">
-            <span>Plot Measurement & Summation</span>
-            <span style="font-size: 0.8rem; color: var(--accent); font-weight: 500;">Step 1 Ready</span>
+        
+        <!-- Digital Calculator Screen -->
+        <div class="calc-screen-card">
+          <div class="calc-expression-bar">
+            <span id="calcExpression">0</span>
           </div>
 
-          <div class="step-placeholder">
-            <div class="step-placeholder-icon">📐✨</div>
-            <div class="step-placeholder-title">PWA Foundation Ready!</div>
-            <div class="step-placeholder-desc">
-              The project structure, offline service worker, and UI dock are set up.<br><br>
-              <strong>Next Step (Step 2)</strong>: Share your calculation formulas and examples so we can implement the exact core math logic!
+          <div class="calc-main-display">
+            <span id="calcDisplay">0</span>
+          </div>
+
+          <div class="calc-subtitle-badge">
+            <span id="calcHumanText" class="human-badge">0 Acres, 0 Guntas</span>
+          </div>
+
+          <div class="calc-conversions-bar" id="calcConversionsBar">
+            <span>📐 <span id="calcSqFt">0</span> Sq Ft</span>
+            <span class="dot-separator">•</span>
+            <span><span id="calcSqYards">0</span> Sq Yds</span>
+          </div>
+        </div>
+
+        <!-- Phone Calculator Keypad -->
+        <div class="card calc-keypad-card">
+          <div class="keypad-grid">
+            <!-- Row 1 -->
+            <button class="key-btn key-action" data-key="AC">AC</button>
+            <button class="key-btn key-action" data-key="DEL">⌫</button>
+            <button class="key-btn key-num" data-key="00">00</button>
+            <button class="key-btn key-special" data-key="+" id="addParcelBtn" title="Add Land Parcel size">+ Add</button>
+
+            <!-- Row 2 -->
+            <button class="key-btn key-num" data-key="7">7</button>
+            <button class="key-btn key-num" data-key="8">8</button>
+            <button class="key-btn key-num" data-key="9">9</button>
+            <button class="key-btn key-special" data-key="+" title="Add Land Parcel size">+ Add</button>
+
+            <!-- Row 3 -->
+            <button class="key-btn key-num" data-key="4">4</button>
+            <button class="key-btn key-num" data-key="5">5</button>
+            <button class="key-btn key-num" data-key="6">6</button>
+            <button class="key-btn key-equals" data-key="=">=</button>
+
+            <!-- Row 4 -->
+            <button class="key-btn key-num" data-key="1">1</button>
+            <button class="key-btn key-num" data-key="2">2</button>
+            <button class="key-btn key-num" data-key="3">3</button>
+            <button class="key-btn key-equals" data-key="=">=</button>
+
+            <!-- Row 5 -->
+            <button class="key-btn key-num key-zero" data-key="0">0</button>
+            <button class="key-btn key-num" data-key=".">.</button>
+            <button class="key-btn key-save" data-key="SAVE" id="saveCalcBtn" title="Save Calculation to History">💾 Save</button>
+          </div>
+        </div>
+
+        <!-- Active Land Parcels List Breakdown -->
+        <div class="card parcels-card">
+          <div class="card-title">
+            <div class="title-left">
+              <span>🌾 Land Parcels List</span>
+              <span id="parcelCountBadge" class="badge">0 Parcels</span>
+            </div>
+            <button id="clearParcelsBtn" class="btn-text-danger" title="Clear all parcels">Clear List</button>
+          </div>
+
+          <div id="parcelList" class="parcel-list-container">
+            <div class="empty-parcel-state">
+              <span>🌱</span>
+              <p>No parcels added yet. Enter a size above and tap <strong>+ Parcel</strong> or <strong>+</strong> to add land sizes.</p>
+            </div>
+          </div>
+
+          <!-- Total Summary Card -->
+          <div id="totalSummaryCard" class="total-summary-box">
+            <div class="summary-header">Total Combined Land</div>
+            <div id="totalFormattedCode" class="summary-code">0.00</div>
+            <div id="totalHumanText" class="summary-human">0 Acres, 0 Guntas</div>
+            <div class="summary-conversions">
+              <div><strong id="totalSqFtVal">0</strong> <small>Sq Ft</small></div>
+              <div><strong id="totalSqYardsVal">0</strong> <small>Sq Yds</small></div>
+              <div><strong id="totalSqMetersVal">0</strong> <small>Sq Mtr</small></div>
             </div>
           </div>
         </div>
-      </section>
 
-      <!-- VIEW 2: Calculation History Panel -->
-      <section id="viewHistory" class="view-panel">
-        <div class="card">
-          <div class="card-title">Saved Calculations</div>
-          <div id="historyList" class="step-placeholder">
-            <div class="step-placeholder-icon">📜</div>
-            <div class="step-placeholder-desc">No saved calculations yet. History will appear here when you sum up plot dimensions.</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- VIEW 3: Settings & Unit Presets Panel -->
-      <section id="viewSettings" class="view-panel">
-        <div class="card">
-          <div class="card-title">App Info & Units</div>
-          <div style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
-            <p><strong>App Version:</strong> 1.0.0 (PWA Offline Enabled)</p>
-            <p><strong>Storage Status:</strong> Local Persistent Storage Active</p>
-            <p style="margin-top: 0.75rem;">This PWA can be added to your Android home screen and will function 100% offline without internet connection.</p>
-          </div>
-        </div>
       </section>
 
     </main>
-
-    <!-- Bottom Dock Navigation Bar -->
-    <nav class="tab-dock" aria-label="Main Navigation">
-      <button class="tab-btn active" data-tab="viewCalculator">
-        <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM8 8h2v2H8zm6 0h2v2h-2zm-6 4h2v2H8zm6 0h2v2h-2zm-6 4h8v2H8z"/></svg>
-        <span>Calculator</span>
-      </button>
-
-      <button class="tab-btn" data-tab="viewHistory">
-        <svg viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 9 0 0118 0z"/></svg>
-        <span>History</span>
-      </button>
-
-      <button class="tab-btn" data-tab="viewSettings">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
-        <span>Settings</span>
-      </button>
-    </nav>
   </div>
 
   <!-- Main JavaScript App Entry -->
