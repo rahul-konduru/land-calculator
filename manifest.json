@@ -1,6 +1,6 @@
 {
-  "name": "Land Dimension Calculator",
-  "short_name": "LandCalc",
+  "name": "LandCalculator",
+  "short_name": "LandCalculator",
   "description": "Offline Land Dimension, Area Summation and Unit Calculator",
   "start_url": "./index.html",
   "display": "standalone",

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'land-calculator-v5';
+const CACHE_NAME = 'land-calculator-v7';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',

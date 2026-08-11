@@ -57,19 +57,26 @@ function runPwaTests() {
     assert(swContent.includes('fetch'), 'sw.js handles fetch event for offline support');
   }
 
-  // Test 3: Check index.html and app.js PWA tags
-  console.log('\n--- Test Suite 3: HTML PWA & Meta Tag Standard ---');
+  // Test 3: Check index.html, styles.css, and app.js PWA tags
+  console.log('\n--- Test Suite 3: HTML PWA & Safe Area Inset Standard ---');
   const indexPath = path.join(projectRoot, 'index.html');
+  const cssPath = path.join(projectRoot, 'css', 'styles.css');
   const appJsPath = path.join(projectRoot, 'js', 'app.js');
   assert(fs.existsSync(indexPath), 'index.html exists');
 
   if (fs.existsSync(indexPath)) {
     const indexContent = fs.readFileSync(indexPath, 'utf8');
     const appJsContent = fs.existsSync(appJsPath) ? fs.readFileSync(appJsPath, 'utf8') : '';
+    const cssContent = fs.existsSync(cssPath) ? fs.readFileSync(cssPath, 'utf8') : '';
+
     assert(indexContent.includes('<meta name="viewport"'), 'index.html includes viewport meta tag');
+    assert(indexContent.includes('viewport-fit=cover'), 'index.html viewport specifies viewport-fit=cover for safe area');
     assert(indexContent.includes('<meta name="theme-color"'), 'index.html includes theme-color meta tag');
+    assert(indexContent.includes('apple-mobile-web-app-capable'), 'index.html includes iOS standalone app capable meta tag');
+    assert(indexContent.includes('apple-mobile-web-app-status-bar-style'), 'index.html includes iOS status bar style meta tag');
     assert(indexContent.includes('<link rel="manifest" href="./manifest.json">'), 'index.html links to manifest.json');
     assert(indexContent.includes('serviceWorker') || appJsContent.includes('serviceWorker'), 'index.html or imported app.js registers service worker');
+    assert(cssContent.includes('env(safe-area-inset-top'), 'styles.css incorporates env(safe-area-inset-top) for OS status bar spacing');
   }
 
   console.log(`\n========================================`);

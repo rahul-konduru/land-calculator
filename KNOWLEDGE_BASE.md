@@ -42,10 +42,10 @@ land-calculator/
 ```
 
 ### Technology Breakdown:
-* **HTML5**: Semantic tags, accessible forms, mobile viewports (`viewport-fit=cover`).
-* **Vanilla CSS3**: Design system tokens (HSL colors, dark mode defaults, light theme toggle), CSS Grid & Flexbox, smooth transitions, hardware-accelerated transforms (`translate3d`), glassmorphic cards.
+* **HTML5**: Semantic tags, accessible forms, mobile viewports (`viewport-fit=cover`, safe-area-inset-top/bottom).
+* **Vanilla CSS3**: Design system tokens (HSL colors, dark mode defaults, light theme toggle), CSS Grid & Flexbox, smooth transitions, hardware-accelerated transforms (`translate3d`), glassmorphic cards, iOS & Android notch/status bar safe area handling (`env(safe-area-inset-top)`).
 * **JavaScript (ES6 Modules)**: Native modular structure without bundlers.
-* **Service Worker API**: Caches static assets into `land-calculator-v5` for instant offline loading with cache fallback.
+* **Service Worker API**: Caches static assets into `land-calculator-v6` for instant offline loading with cache fallback.
 * **Web Storage API (`localStorage`)**: Persists user calculations, parcel breakdown lists, and theme preferences locally on device.
 
 ---
@@ -54,9 +54,10 @@ land-calculator/
 
 ### How Offline Works:
 1. When `index.html` is loaded for the first time, `js/app.js` registers `sw.js`.
-2. `sw.js` executes the `install` event and caches all essential static assets into `land-calculator-v5`.
+2. `sw.js` executes the `install` event and caches all essential static assets into `land-calculator-v6`.
 3. Subsequent page loads use the network-first with cache-fallback strategy in `sw.js` to serve cached resources immediately offline.
 4. An offline banner automatically alerts the user if network status changes to offline, though all app functions remain operational offline.
+5. Safe Area Inset Support: Uses `viewport-fit=cover` in `index.html` combined with `calc(0.85rem + env(safe-area-inset-top, 0px))` in `css/styles.css` to prevent status bar/notch overlap when saved to Home Screen on iOS and Android standalone PWAs.
 
 ---
 

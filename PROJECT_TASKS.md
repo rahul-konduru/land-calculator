@@ -38,8 +38,9 @@ This document maintains the task roadmap and current status of all features and 
 ---
 
 ## 📌 Phase 4: Deployment & Polish (Completed)
-- [x] Offline PWA testing & service worker asset verification (`tests/pwa.test.js` - 20/20 tests passing)
+- [x] Offline PWA testing & service worker asset verification (`tests/pwa.test.js` - 24/24 tests passing)
 - [x] Performance audit, HTML PWA meta tags, and Web App Manifest standard compliance
+- [x] iOS & Android standalone PWA status bar safe area inset top/bottom padding fix (`env(safe-area-inset-top)`)
 - [x] Deployment setup via GitHub Actions workflow (`.github/workflows/deploy.yml`) to GitHub Pages
 - [x] Comprehensive repository documentation (`README.md`), knowledge base update, and walkthrough creation
 
