@@ -17,6 +17,7 @@ const state = {
 let deferredPrompt = null;
 
 document.addEventListener('DOMContentLoaded', () => {
+  initTheme();
   initServiceWorker();
   initNetworkStatus();
   initInstallPrompt();
@@ -26,6 +27,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
   console.log('Land Calculator PWA initialized.', CalculatorEngine.info());
 });
+
+/**
+ * 0. Theme Manager & Interactive Switch (Light / Dark Theme)
+ */
+function initTheme() {
+  const themeToggleBtn = document.getElementById('themeToggleBtn');
+  const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+
+  const settings = StorageManager.getSettings();
+  let currentTheme = settings.theme;
+
+  if (!currentTheme) {
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    currentTheme = prefersDark ? 'dark' : 'dark';
+  }
+
+  applyTheme(currentTheme);
+
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => {
+      triggerHaptic();
+      const activeTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+      const newTheme = activeTheme === 'dark' ? 'light' : 'dark';
+      
+      applyTheme(newTheme);
+      StorageManager.saveSettings({ theme: newTheme });
+    });
+  }
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    if (metaThemeColor) {
+      metaThemeColor.setAttribute('content', theme === 'light' ? '#f8fafc' : '#0f172a');
+    }
+    if (themeToggleBtn) {
+      themeToggleBtn.setAttribute('aria-checked', theme === 'light' ? 'true' : 'false');
+      themeToggleBtn.setAttribute('title', `Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Theme`);
+    }
+  }
+}
 
 /**
  * 1. Register Service Worker for 100% Offline PWA Capability

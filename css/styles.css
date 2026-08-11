@@ -1,6 +1,7 @@
-/* Land Calculator PWA - Design System & Modern CSS Styles */
+/* Land Calculator PWA - Design System & Theme Styles */
 
-:root {
+:root,
+[data-theme="dark"] {
   /* Color Palette - HSL Tailored Dark Theme */
   --bg-main: hsl(222, 47%, 7%);
   --bg-card: hsl(222, 40%, 12%);
@@ -21,6 +22,38 @@
   
   --danger: hsl(0, 84%, 60%);
   --warning: hsl(38, 92%, 50%);
+
+  --brand-gradient: linear-gradient(135deg, #ffffff, #93c5fd);
+
+  --calc-screen-bg: linear-gradient(145deg, hsl(222, 45%, 11%), hsl(222, 50%, 7%));
+  --calc-screen-border: rgba(59, 130, 246, 0.2);
+  --calc-screen-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  --calc-display-color: #ffffff;
+  --calc-display-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+
+  --key-num-bg: hsl(222, 35%, 15%);
+  --key-num-color: #ffffff;
+  --key-num-active: hsl(222, 35%, 22%);
+
+  --key-action-bg: hsl(222, 25%, 22%);
+  --key-action-color: var(--danger);
+
+  --key-decorative-bg: rgba(255, 255, 255, 0.04);
+  --key-decorative-border: 1px dashed rgba(255, 255, 255, 0.12);
+
+  --parcel-item-bg: rgba(15, 23, 42, 0.6);
+  --parcel-item-hover: rgba(30, 41, 59, 0.7);
+  --parcel-idx-bg: rgba(255, 255, 255, 0.08);
+
+  --total-summary-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(59, 130, 246, 0.12));
+  --total-summary-border: 1px solid rgba(16, 185, 129, 0.3);
+  --total-summary-code: #ffffff;
+  --total-summary-border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+  --input-bg: rgba(15, 23, 42, 0.6);
+
+  --app-bg-radial: radial-gradient(circle at top right, rgba(59, 130, 246, 0.08), transparent 40%),
+                   radial-gradient(circle at bottom left, rgba(16, 185, 129, 0.05), transparent 40%);
   
   /* Typography & Geometry */
   --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -35,6 +68,65 @@
   --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.3);
   --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-smooth: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="light"] {
+  /* Color Palette - HSL Tailored Light Theme */
+  --bg-main: hsl(220, 20%, 97%);
+  --bg-card: hsl(0, 0%, 100%);
+  --bg-card-hover: hsl(210, 20%, 98%);
+  --bg-glass: rgba(255, 255, 255, 0.85);
+  --border-glass: rgba(0, 0, 0, 0.08);
+  
+  --primary: hsl(217, 91%, 52%);
+  --primary-hover: hsl(217, 91%, 44%);
+  --primary-gradient: linear-gradient(135deg, hsl(217, 91%, 55%), hsl(250, 84%, 58%));
+  
+  --accent: hsl(160, 84%, 35%);
+  --accent-gradient: linear-gradient(135deg, hsl(160, 84%, 38%), hsl(172, 80%, 35%));
+  
+  --text-main: hsl(222, 47%, 12%);
+  --text-muted: hsl(215, 25%, 40%);
+  --text-subtle: hsl(215, 16%, 60%);
+  
+  --danger: hsl(0, 84%, 50%);
+  --warning: hsl(38, 92%, 45%);
+
+  --brand-gradient: linear-gradient(135deg, hsl(222, 47%, 15%), hsl(217, 91%, 45%));
+
+  --calc-screen-bg: linear-gradient(145deg, hsl(214, 100%, 97%), hsl(215, 80%, 93%));
+  --calc-screen-border: rgba(59, 130, 246, 0.3);
+  --calc-screen-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  --calc-display-color: hsl(222, 47%, 11%);
+  --calc-display-shadow: none;
+
+  --key-num-bg: hsl(0, 0%, 100%);
+  --key-num-color: hsl(222, 47%, 12%);
+  --key-num-active: hsl(214, 30%, 92%);
+
+  --key-action-bg: hsl(0, 80%, 96%);
+  --key-action-color: hsl(0, 84%, 50%);
+
+  --key-decorative-bg: rgba(0, 0, 0, 0.03);
+  --key-decorative-border: 1px dashed rgba(0, 0, 0, 0.12);
+
+  --parcel-item-bg: hsl(210, 20%, 97%);
+  --parcel-item-hover: hsl(210, 20%, 93%);
+  --parcel-idx-bg: rgba(0, 0, 0, 0.06);
+
+  --total-summary-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(59, 130, 246, 0.1));
+  --total-summary-border: 1px solid rgba(16, 185, 129, 0.3);
+  --total-summary-code: hsl(222, 47%, 12%);
+  --total-summary-border-top: 1px solid rgba(0, 0, 0, 0.08);
+
+  --input-bg: hsl(210, 20%, 96%);
+
+  --app-bg-radial: radial-gradient(circle at top right, rgba(59, 130, 246, 0.12), transparent 50%),
+                   radial-gradient(circle at bottom left, rgba(16, 185, 129, 0.08), transparent 50%);
+
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 4px 10px -2px rgba(0, 0, 0, 0.04);
+  --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.2);
 }
 
 /* Base Resets */
@@ -55,6 +147,7 @@ html, body {
   line-height: 1.5;
   overflow-x: hidden;
   user-select: none;
+  transition: background-color var(--transition-smooth), color var(--transition-smooth);
 }
 
 /* App Container */
@@ -65,8 +158,8 @@ html, body {
   max-width: 600px;
   margin: 0 auto;
   position: relative;
-  background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.08), transparent 40%),
-              radial-gradient(circle at bottom left, rgba(16, 185, 129, 0.05), transparent 40%);
+  background: var(--app-bg-radial);
+  transition: background var(--transition-smooth);
 }
 
 /* Header */
@@ -82,6 +175,7 @@ html, body {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border-glass);
+  transition: background var(--transition-smooth), border-color var(--transition-smooth);
 }
 
 .brand {
@@ -106,9 +200,77 @@ html, body {
   font-size: 1.15rem;
   font-weight: 700;
   letter-spacing: -0.02em;
-  background: linear-gradient(135deg, #ffffff, #93c5fd);
+  background: var(--brand-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* Theme Toggle Switch */
+.theme-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 58px;
+  height: 32px;
+  padding: 3px 5px;
+  border-radius: var(--radius-full);
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  cursor: pointer;
+  position: relative;
+  transition: background var(--transition-smooth), border-color var(--transition-smooth);
+  box-shadow: var(--shadow-sm);
+}
+
+.theme-toggle-btn:focus-visible {
+  outline: 2px solid var(--primary);
+}
+
+.theme-toggle-icon {
+  font-size: 0.85rem;
+  line-height: 1;
+  z-index: 1;
+  user-select: none;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.sun-icon {
+  opacity: 0.4;
+}
+
+.moon-icon {
+  opacity: 1;
+}
+
+[data-theme="light"] .sun-icon {
+  opacity: 1;
+}
+
+[data-theme="light"] .moon-icon {
+  opacity: 0.4;
+}
+
+.theme-toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--primary-gradient);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-smooth);
+  z-index: 2;
+}
+
+[data-theme="light"] .theme-toggle-thumb {
+  transform: translateX(26px);
 }
 
 .install-btn {
@@ -228,7 +390,7 @@ html, body {
 .input-field {
   width: 100%;
   min-height: 46px;
-  background: rgba(15, 23, 42, 0.6);
+  background: var(--input-bg);
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-md);
   padding: 0.65rem 0.9rem;
@@ -236,7 +398,7 @@ html, body {
   font-size: 1rem;
   font-family: inherit;
   outline: none;
-  transition: border-color var(--transition-fast);
+  transition: border-color var(--transition-fast), background var(--transition-smooth), color var(--transition-smooth);
 }
 
 .input-field:focus {
@@ -272,11 +434,11 @@ html, body {
 
 /* Digital Calculator Display Screen */
 .calc-screen-card {
-  background: linear-gradient(145deg, hsl(222, 45%, 11%), hsl(222, 50%, 7%));
+  background: var(--calc-screen-bg);
   border-radius: var(--radius-lg);
   padding: 1.25rem 1.5rem;
-  border: 1px solid rgba(59, 130, 246, 0.2);
-  box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--calc-screen-border);
+  box-shadow: var(--calc-screen-shadow);
   margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
@@ -284,6 +446,7 @@ html, body {
   gap: 0.35rem;
   position: relative;
   overflow: hidden;
+  transition: background var(--transition-smooth), border-color var(--transition-smooth), box-shadow var(--transition-smooth);
 }
 
 .calc-screen-card::before {
@@ -310,10 +473,11 @@ html, body {
   font-weight: 800;
   line-height: 1.1;
   letter-spacing: -0.03em;
-  color: #ffffff;
+  color: var(--calc-display-color);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  text-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+  text-shadow: var(--calc-display-shadow);
   word-break: break-all;
+  transition: color var(--transition-smooth), text-shadow var(--transition-smooth);
 }
 
 .calc-subtitle-badge {
@@ -327,7 +491,7 @@ html, body {
   padding: 0.25rem 0.65rem;
   border-radius: var(--radius-full);
   background: rgba(16, 185, 129, 0.15);
-  color: hsl(160, 84%, 45%);
+  color: var(--accent);
   border: 1px solid rgba(16, 185, 129, 0.3);
   letter-spacing: 0.01em;
 }
@@ -371,27 +535,27 @@ html, body {
   cursor: pointer;
   outline: none;
   user-select: none;
-  transition: transform 0.08s ease, background 0.15s ease, box-shadow 0.15s ease;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  transition: transform 0.08s ease, background var(--transition-smooth), color var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-smooth);
+  box-shadow: var(--shadow-sm);
 }
 
 .key-btn:active {
   transform: scale(0.92);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .key-num {
-  background: hsl(222, 35%, 15%);
-  color: #ffffff;
+  background: var(--key-num-bg);
+  color: var(--key-num-color);
 }
 
 .key-num:active {
-  background: hsl(222, 35%, 22%);
+  background: var(--key-num-active);
 }
 
 .key-action {
-  background: hsl(222, 25%, 22%);
-  color: var(--danger);
+  background: var(--key-action-bg);
+  color: var(--key-action-color);
   font-weight: 700;
   font-size: 1.1rem;
 }
@@ -429,14 +593,14 @@ html, body {
 }
 
 .key-decorative {
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--key-decorative-bg);
   color: var(--text-muted);
-  border: 1px dashed rgba(255, 255, 255, 0.12);
+  border: var(--key-decorative-border);
   font-size: 1.35rem;
   cursor: default;
   user-select: none;
   opacity: 0.75;
-  transition: opacity 0.2s ease, background 0.2s ease;
+  transition: opacity 0.2s ease, background var(--transition-smooth), border-color var(--transition-smooth);
 }
 
 .key-decorative:hover {
@@ -446,7 +610,7 @@ html, body {
 
 .key-decorative:active {
   transform: none;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--shadow-sm);
 }
 
 .key-zero {
@@ -503,14 +667,14 @@ html, body {
   align-items: center;
   justify-content: space-between;
   padding: 0.75rem 0.9rem;
-  background: rgba(15, 23, 42, 0.6);
+  background: var(--parcel-item-bg);
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-md);
-  transition: background var(--transition-fast);
+  transition: background var(--transition-smooth), border-color var(--transition-smooth);
 }
 
 .parcel-item:hover {
-  background: rgba(30, 41, 59, 0.7);
+  background: var(--parcel-item-hover);
 }
 
 .parcel-item-left {
@@ -523,7 +687,7 @@ html, body {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--parcel-idx-bg);
   font-size: 0.75rem;
   font-weight: 700;
   display: flex;
@@ -579,11 +743,12 @@ html, body {
 
 /* Total Summary Box */
 .total-summary-box {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(59, 130, 246, 0.12));
-  border: 1px solid rgba(16, 185, 129, 0.3);
+  background: var(--total-summary-bg);
+  border: var(--total-summary-border);
   border-radius: var(--radius-md);
   padding: 1rem;
   text-align: center;
+  transition: background var(--transition-smooth), border-color var(--transition-smooth);
 }
 
 .summary-header {
@@ -598,14 +763,15 @@ html, body {
 .summary-code {
   font-size: 1.8rem;
   font-weight: 800;
-  color: #ffffff;
+  color: var(--total-summary-code);
   line-height: 1.2;
+  transition: color var(--transition-smooth);
 }
 
 .summary-human {
   font-size: 0.875rem;
   font-weight: 600;
-  color: hsl(160, 84%, 45%);
+  color: var(--accent);
   margin-bottom: 0.75rem;
 }
 
@@ -614,7 +780,7 @@ html, body {
   grid-template-columns: repeat(3, 1fr);
   gap: 0.5rem;
   padding-top: 0.75rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: var(--total-summary-border-top);
   font-size: 0.8rem;
 }
 

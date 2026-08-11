@@ -16,6 +16,20 @@
   
   <!-- CSS Design System -->
   <link rel="stylesheet" href="./css/styles.css">
+  <!-- Early Theme Initialization Script -->
+  <script>
+    (function() {
+      try {
+        const settings = JSON.parse(localStorage.getItem('land_calc_settings')) || {};
+        const savedTheme = settings.theme;
+        const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = savedTheme || (systemPrefersDark ? 'dark' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+        const metaTheme = document.querySelector('meta[name="theme-color"]');
+        if (metaTheme) metaTheme.setAttribute('content', theme === 'light' ? '#f8fafc' : '#0f172a');
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
 
@@ -26,9 +40,16 @@
         <div class="brand-icon">📐</div>
         <div class="brand-title">Land Calc</div>
       </div>
-      <button id="installPwaBtn" class="install-btn" aria-label="Install App">
-        <span>📲</span> Install App
-      </button>
+      <div class="header-actions">
+        <button id="themeToggleBtn" class="theme-toggle-btn" role="switch" aria-checked="false" aria-label="Switch between light and dark theme" title="Toggle Light/Dark Theme">
+          <span class="theme-toggle-icon sun-icon">☀️</span>
+          <span class="theme-toggle-icon moon-icon">🌙</span>
+          <span class="theme-toggle-thumb"></span>
+        </button>
+        <button id="installPwaBtn" class="install-btn" aria-label="Install App">
+          <span>📲</span> Install App
+        </button>
+      </div>
     </header>
 
     <!-- Offline Notification Banner -->
