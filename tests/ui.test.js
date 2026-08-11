@@ -48,6 +48,13 @@ function runUiIntegrationTests() {
   assertEqual(res4.total.formattedCode, '0.00', 'Cleared list total formatted code = 0.00');
   assertEqual(res4.total.humanText, '0 Acres, 0 Guntas, 0 Cents', 'Cleared list human breakdown');
 
+  // Test 5: Simulating parcel subtraction sequence 2.00 + Add + 0.50 + Sub + = 0.30 (0 Ac 30 Gn)
+  console.log('\n--- Test Suite 5: Parcel Subtraction Sequence ---');
+  const subParcels = ['2.00', '-0.50'];
+  const res5 = CalculatorEngine.calculateSum(subParcels);
+  assertEqual(res5.total.formattedCode, '0.30', '2.00 - 0.50 = 0.30 (80 Guntas - 50 Guntas = 30 Guntas)');
+  assertEqual(res5.total.humanText, '0 Acres, 30 Guntas', '0 Acres, 30 Guntas breakdown');
+
   console.log(`\n========================================`);
   console.log(`UI Integration Test Execution Finished: ${passed} Passed, ${failed} Failed`);
   console.log(`========================================\n`);

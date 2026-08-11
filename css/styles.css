@@ -581,6 +581,20 @@ html, body {
   box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
 }
 
+.key-sub {
+  background: linear-gradient(135deg, hsl(0, 75%, 55%), hsl(15, 85%, 55%));
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: none;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+[data-theme="light"] .key-sub {
+  background: linear-gradient(135deg, hsl(0, 75%, 50%), hsl(15, 85%, 50%));
+  color: #ffffff;
+}
+
 .key-equals {
   background: var(--primary-gradient);
   color: #ffffff;

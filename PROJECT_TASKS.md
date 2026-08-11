@@ -29,11 +29,12 @@ This document maintains the task roadmap and current status of all features and 
 
 ## 📌 Phase 3: Calculator User Interface & History Integration (Current)
 - [x] Streamline keypad UI layout by removing `-` key and consolidating into a single land parcel addition button (`+ Add`)
-- [x] Wire keypad button handlers (`0-9`, `.`, `00`, `+ Add`, `=`, `AC`, `DEL`, `💾 Save`) to core `CalculatorEngine`
+- [x] Wire keypad button handlers (`0-9`, `.`, `00`, `+ Add`, `- Sub`, `=`, `AC`, `DEL`, `💾 Save`) to core `CalculatorEngine`
+- [x] Implement `- Sub` keypad button and land parcel subtraction logic (`subtractCurrentInputAsParcel()`)
 - [x] Implement live screen display calculation showing formatted total land size (`A.GGCC`), human breakdown (Acres, Guntas, Cents), and Sq Ft/Yds conversions
-- [x] Implement interactive land parcels breakdown list with item deletion and clear list functionality
+- [x] Implement interactive land parcels breakdown list with item deletion, negative parcel display, and clear list functionality
 - [x] Integrate calculation history view with local storage saving and record reloading into calculator
-- [x] Build automated UI test suite (`tests/ui.test.js`) verifying UI calculation accuracy
+- [x] Build automated test suites (`tests/calculator.test.js`, `tests/ui.test.js`, `tests/user_flow.test.js`) verifying addition and subtraction math accuracy
 
 ---
 

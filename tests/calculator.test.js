@@ -60,6 +60,24 @@ function runTests() {
   assertEqual(summary.total.humanText, '6 Acres, 16 Guntas, 25 Cents', 'Multi-parcel human text');
   assertEqual(summary.total.conversions.totalSqFt, 279056.25, 'Total Sq Ft conversion accuracy');
 
+  // Test 7: Subtraction engine tests
+  console.log('\n--- Test Suite 5: Subtraction Engine & Negative Parcels ---');
+  const sub1 = CalculatorEngine.subtract('1.21', '0.21');
+  assertEqual(sub1.formattedCode, '1.00', '1.21 - 0.21 = 1.00');
+  assertEqual(sub1.humanText, '1 Acre, 0 Guntas', '1.21 - 0.21 human text breakdown');
+
+  const sub2 = CalculatorEngine.subtract('3.02', '1.01');
+  assertEqual(sub2.formattedCode, '2.01', '3.02 - 1.01 = 2.01');
+
+  const subWithBorrow = CalculatorEngine.subtract('2.00', '0.20');
+  assertEqual(subWithBorrow.formattedCode, '1.20', '2.00 - 0.20 = 1.20 (borrowing guntas from acre)');
+  assertEqual(subWithBorrow.humanText, '1 Acre, 20 Guntas', '2.00 - 0.20 human text breakdown');
+
+  const mixedList = ['2.00', '-0.50', '1.10', '-0.20'];
+  const mixedSummary = CalculatorEngine.calculateSum(mixedList);
+  // 2.00 (8000 Cents) - 0.50 (5000 Cents) + 1.10 (5000 Cents) - 0.20 (2000 Cents) = 6000 Cents = 1.20 (1 Ac 20 Gn)
+  assertEqual(mixedSummary.total.formattedCode, '1.20', 'Multi-parcel sum with subtraction = 1.20');
+
   console.log(`\n========================================`);
   console.log(`Test Execution Finished: ${passed} Passed, ${failed} Failed`);
   console.log(`========================================\n`);

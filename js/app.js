@@ -11,6 +11,7 @@ const state = {
   expression: '',
   parcelsList: [],
   isEvaluated: false,
+  pendingOp: '+',
   lastResult: null
 };
 
@@ -157,6 +158,7 @@ function initCalculatorUI() {
       triggerHaptic();
       state.parcelsList = [];
       state.inputBuffer = '0';
+      state.pendingOp = '+';
       state.isEvaluated = false;
       updateDisplayUI();
       updateParcelsListUI();
@@ -177,6 +179,7 @@ function handleKeyInput(key) {
       state.expression = '';
       state.parcelsList = [];
       state.isEvaluated = false;
+      state.pendingOp = '+';
       state.lastResult = null;
       updateDisplayUI();
       updateParcelsListUI();
@@ -195,15 +198,22 @@ function handleKeyInput(key) {
 
     case 'ADD_PARCEL':
     case '+':
-      addCurrentInputAsParcel();
+      commitCurrentInputAsParcel('+');
+      state.isEvaluated = false;
+      break;
+
+    case 'SUB_PARCEL':
+    case '-':
+      commitCurrentInputAsParcel('-');
       state.isEvaluated = false;
       break;
 
     case '=':
       if (state.inputBuffer !== '0' && state.inputBuffer !== '') {
-        addCurrentInputAsParcel();
+        commitCurrentInputAsParcel('+');
       }
       state.isEvaluated = true;
+      state.pendingOp = '+';
       break;
 
     case 'SAVE':
@@ -247,15 +257,53 @@ function handleKeyInput(key) {
 }
 
 /**
- * Add the current entered land size in the display buffer into the active parcels list
+ * Commit current input buffer as a parcel using active pendingOp, then set next pendingOp
  */
-function addCurrentInputAsParcel() {
+function commitCurrentInputAsParcel(nextOp = '+') {
   const val = state.inputBuffer.trim();
   if (val && val !== '0' && !isNaN(Number(val))) {
-    state.parcelsList.push(val);
+    const formattedVal = state.pendingOp === '-' 
+      ? (val.startsWith('-') ? val : `-${val}`)
+      : val.replace(/^-/, '');
+    state.parcelsList.push(formattedVal);
     state.inputBuffer = '0';
     updateParcelsListUI();
   }
+  state.pendingOp = nextOp;
+}
+
+/**
+ * Format expression string nicely for display
+ */
+function formatParcelExpression(parcelsList, pendingOp = '+', inputBuffer = '0', isEvaluated = false) {
+  if (!parcelsList || parcelsList.length === 0) {
+    if (inputBuffer !== '0') return inputBuffer;
+    return '0';
+  }
+
+  let expr = '';
+  parcelsList.forEach((p, idx) => {
+    const str = String(p).trim();
+    if (idx === 0) {
+      expr += str;
+    } else if (str.startsWith('-')) {
+      expr += ` - ${str.substring(1)}`;
+    } else {
+      expr += ` + ${str}`;
+    }
+  });
+
+  if (isEvaluated) {
+    expr += ' =';
+  } else if (inputBuffer !== '0') {
+    const op = pendingOp === '-' ? '-' : '+';
+    const cleanInput = inputBuffer.startsWith('-') ? inputBuffer.substring(1) : inputBuffer;
+    expr += ` ${op} ${cleanInput}`;
+  } else {
+    expr += ` ${pendingOp}`;
+  }
+
+  return expr;
 }
 
 /**
@@ -270,16 +318,21 @@ function updateDisplayUI() {
 
   const summaryResult = CalculatorEngine.calculateSum(state.parcelsList);
 
+  calcExpression.textContent = formatParcelExpression(
+    state.parcelsList,
+    state.pendingOp,
+    state.inputBuffer,
+    state.isEvaluated
+  );
+
   if (state.isEvaluated || state.inputBuffer === '0') {
     // Evaluated state or idle state: show total calculated land sum
     if (state.parcelsList.length > 0) {
-      calcExpression.textContent = `${state.parcelsList.join(' + ')}${state.isEvaluated ? ' =' : ' +'}`;
       calcDisplay.textContent = summaryResult.total.formattedCode;
       calcHumanText.textContent = summaryResult.total.humanText;
       calcSqFt.textContent = summaryResult.total.conversions.totalSqFt.toLocaleString();
       calcSqYards.textContent = summaryResult.total.conversions.totalSqYards.toLocaleString();
     } else {
-      calcExpression.textContent = '0';
       calcDisplay.textContent = '0';
       calcHumanText.textContent = '0 Acres, 0 Guntas';
       calcSqFt.textContent = '0';
@@ -289,12 +342,6 @@ function updateDisplayUI() {
     // User is actively typing a new parcel number
     const cents = CalculatorEngine.parseLandInputToCents(state.inputBuffer);
     const decoded = CalculatorEngine.decodeCentsToLand(cents);
-
-    if (state.parcelsList.length > 0) {
-      calcExpression.textContent = `${state.parcelsList.join(' + ')} + ${state.inputBuffer}`;
-    } else {
-      calcExpression.textContent = state.inputBuffer;
-    }
 
     calcDisplay.textContent = state.inputBuffer;
     calcHumanText.textContent = decoded.humanText;
@@ -384,7 +431,7 @@ function saveCurrentCalculation() {
 
   // Ensure current input is added if not empty
   if (state.inputBuffer !== '0' && state.inputBuffer !== '') {
-    addCurrentInputAsParcel();
+    commitCurrentInputAsParcel('+');
   }
 
   const summaryResult = CalculatorEngine.calculateSum(state.parcelsList);
@@ -419,6 +466,8 @@ function initKeyboardSupport() {
       handleKeyInput('.');
     } else if (key === '+') {
       handleKeyInput('ADD_PARCEL');
+    } else if (key === '-') {
+      handleKeyInput('SUB_PARCEL');
     } else if (key === 'Enter' || key === '=') {
       e.preventDefault();
       handleKeyInput('=');
