@@ -1,0 +1,61 @@
+name: Deploy Land Calculator PWA to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  test-and-build:
+    name: Run Test Suite
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run Core Calculator Unit Tests
+        run: node tests/calculator.test.js
+
+      - name: Run Theme & Storage Tests
+        run: node tests/theme.test.js
+
+      - name: Run UI Integration Tests
+        run: node tests/ui.test.js
+
+      - name: Run User Flow Simulation Tests
+        run: node tests/user_flow.test.js
+
+      - name: Run PWA & Offline Compliance Tests
+        run: node tests/pwa.test.js
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: test-and-build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
